@@ -1,50 +1,68 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class Detail extends StatefulWidget {
-  @override
-  _DetailState createState() => _DetailState();
-}
+  final url;
+  final title;
+  final content;
+  final publishedAt;
+  final author;
+  final urlToImage;
 
-class _DetailState extends State<Detail> {
+  Detail({
+    this.url,
+    this.title,
+    this.content,
+    this.publishedAt,
+    this.author,
+    this.urlToImage});
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          urlToImage != null ? Image.network(urlToImage) : Container(
             height: 250,
             color: Colors.grey[200],
           ),
           Container(
-             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'title',
-                  style: TextStyle(fontSize: 18, fontWeight:  FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'date',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                    SizedBox(height: 5),
-                    Text('content'),
-                    Divider(),
-                    Text('Author:'),
-                    Text('Sumber'),
+                  '$title',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '$publishedAt',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                SizedBox(height: 5),
+                Text('content'),
+                Divider(),
+                Text('Author:'),
+                Text('Sumber'),
               ],
             ),
           )
         ],
-      ), 
-      floatingActionButton:FloatingActionButton(
+      ),
+      floatingActionButton: FloatingActionButton(
         child: Icon(Icons.close),
         onPressed: () => Navigator.pop(context),
       ),
-       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        );
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
